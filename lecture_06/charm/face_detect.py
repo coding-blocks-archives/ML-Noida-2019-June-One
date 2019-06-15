@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from os import path
 
 name = input("Enter your name : ")
 
@@ -43,8 +44,18 @@ while True:
     if cv2.waitKey(1) > 30:
         break
 
+face_list = np.array(face_list)
+name_list = np.full((len(face_list), 1), name)
 
+total = np.hstack([name_list, face_list])
 
+if path.exists("chacha.npy"):
+    data = np.load("chacha.npy")
+    data = np.vstack([data, total])
+else:
+    data = total
+
+np.save("chacha.npy", data)
 
 cap.release()
 cv2.destroyAllWindows()
