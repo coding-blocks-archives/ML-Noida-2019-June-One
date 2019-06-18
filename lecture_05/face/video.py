@@ -25,3 +25,6 @@ while True:
     if cv2.waitKey(1) > 30:
         cv2.imwrite("class.jpg", gray)
         break
+
+cap.release()
+cv2.destroyAllWindows()
